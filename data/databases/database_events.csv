@@ -1,0 +1,17 @@
+timestamp,event,connections,failed_queries,description
+2026-09-04 14:20:00,normal,42,0,Database operating normally
+2026-09-04 14:21:00,normal,44,0,Database operating normally
+2026-09-04 14:22:00,normal,45,0,Database operating normally
+2026-09-04 14:23:00,normal,43,0,Database operating normally
+2026-09-04 14:24:00,normal,46,0,Database operating normally
+2026-09-04 14:25:00,normal,48,0,Database operating normally
+2026-09-04 14:26:00,normal,49,0,Database operating normally
+2026-09-04 14:27:00,normal,51,0,Database operating normally
+2026-09-04 14:28:00,normal,55,1,Connection usage increasing
+2026-09-04 14:29:00,warning,72,4,Database connection usage elevated
+2026-09-04 14:30:00,error,94,18,Database connection failures increasing
+2026-09-04 14:31:00,error,100,37,Connection pool exhausted
+2026-09-04 14:32:00,error,100,52,Connection pool exhausted
+2026-09-04 14:33:00,error,98,44,Database connections recovering slowly
+2026-09-04 14:34:00,warning,82,21,Database connection usage elevated
+2026-09-04 14:35:00,warning,76,12,Database connection usage elevated

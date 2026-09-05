@@ -1,0 +1,30 @@
+[project]
+name = "incident-commander"
+version = "1.0.0"
+description = "AI Software Incident Commander for multi-agent incident investigation, root-cause analysis, RAG, critic review, and human-in-the-loop approval"
+readme = "README.md"
+requires-python = ">=3.12"
+
+dependencies = [
+    "streamlit>=1.40.0",
+    "langgraph>=0.2.0",
+    "langchain-core>=0.3.0",
+    "langchain-groq>=0.2.0",
+    "langchain-community>=0.3.0",
+    "langchain-text-splitters>=0.3.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -1,0 +1,8 @@
+langchain
+langchain-core
+langchain-groq
+langgraph
+python-dotenv
+streamlit
+pandas
+scikit-learn
