@@ -1,8 +1,10 @@
+streamlit
+langgraph
 langchain
 langchain-core
+langchain-community
+langchain-text-splitters
 langchain-groq
-langgraph
 python-dotenv
-streamlit
 pandas
 scikit-learn
