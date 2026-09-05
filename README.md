@@ -1,38 +1,59 @@
 # 🚨 AI Software Incident Commander
 
 <p align="center">
+  <strong>AI-powered multi-agent system for automated software incident investigation, root-cause analysis, and human-approved incident reporting.</strong>
+</p>
+
+<p align="center">
+  <a href="https://incident-commander-nxajqnrs43zdexjv43y72u.streamlit.app/">🚀 Live Demo</a>
+  &nbsp;•&nbsp;
+  <a href="https://github.com/Mohith2801/Incident-Commander">💻 GitHub</a>
+</p>
+
+<p align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python)
 ![LangGraph](https://img.shields.io/badge/LangGraph-Multi--Agent-orange?style=for-the-badge)
 ![LangChain](https://img.shields.io/badge/LangChain-LLM-green?style=for-the-badge)
 ![Groq](https://img.shields.io/badge/Groq-Live%20AI-purple?style=for-the-badge)
-![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-FF4B4B?style=for-the-badge&logo=streamlit)
 ![RAG](https://img.shields.io/badge/RAG-Knowledge%20Retrieval-yellow?style=for-the-badge)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-red?style=for-the-badge&logo=streamlit)
 ![HITL](https://img.shields.io/badge/Human--in--the--Loop-Approval-red?style=for-the-badge)
 
 </p>
 
+---
+
+## 🎬 Application Demo
+
 <p align="center">
-<b>AI-powered multi-agent incident investigation system for analyzing logs, metrics, database events, deployments, and historical knowledge to identify software incident root causes.</b>
+  <img src="assets/demo.gif" alt="AI Software Incident Commander Demo" width="900">
 </p>
+
+The demo shows incident submission, multi-agent investigation, RCA generation, Critic validation, Human-in-the-Loop review, and final report generation.
 
 ---
 
 ## 🌐 Live Demo
 
-**Try the application:**  
+🚀 **Application:**  
 https://incident-commander-nxajqnrs43zdexjv43y72u.streamlit.app/
 
-**GitHub Repository:**  
+💻 **Repository:**  
 https://github.com/Mohith2801/Incident-Commander
+
+The application supports:
+
+- 🟢 **Offline / Demo Mode** — Complete workflow without Groq API calls.
+- 🟣 **Live AI Mode** — AI-powered reasoning using Groq.
 
 ---
 
-## 📌 Overview
+# 📌 Overview
 
-**AI Software Incident Commander** is a multi-agent AI system designed to assist engineers during software incident investigations.
+**AI Software Incident Commander** is a stateful multi-agent AI system designed to assist engineers during software incident investigations.
 
-Instead of manually analyzing different sources of operational data, the system coordinates specialized agents that investigate:
+Instead of manually checking different operational sources, the system coordinates specialized agents to analyze:
 
 - Application logs
 - API metrics
@@ -41,15 +62,15 @@ Instead of manually analyzing different sources of operational data, the system 
 - Historical incidents
 - Troubleshooting documentation
 
-The collected evidence is then correlated to identify relationships between events and generate an evidence-based **Root Cause Analysis (RCA)**.
+The collected evidence is correlated to generate a **Root Cause Analysis (RCA)**.
 
-A **Critic Agent** validates the proposed RCA, while a **Human-in-the-Loop** review step allows an engineer to approve the conclusion or request rework before the final incident report is generated.
+A **Critic Agent** validates the RCA, and a **Human-in-the-Loop** stage allows an engineer to approve the conclusion or request rework before the final report is generated.
 
 ---
 
-## 🎯 Problem Statement
+# 🎯 Problem Statement
 
-During a software incident, the root cause is often distributed across multiple systems.
+Software incidents often require engineers to manually correlate information across multiple systems.
 
 For example:
 
@@ -67,32 +88,58 @@ HTTP 500 Errors
 Increased Latency
 ```
 
-Finding this relationship manually can be time-consuming.
+Identifying these relationships manually can be time-consuming.
 
-This project provides an automated investigation workflow that combines these signals and presents the engineer with a structured RCA.
-
----
-
-## ✨ Key Features
-
-- 🤖 **Multi-Agent Investigation** — Specialized agents for different investigation tasks.
-- 📊 **Log & Metrics Analysis** — Identifies errors, HTTP failures, latency, and abnormal patterns.
-- 🗄️ **Database Investigation** — Analyzes database-related events and connection failures.
-- 🚀 **Deployment Analysis** — Correlates incidents with recent deployments.
-- 📚 **RAG Knowledge Retrieval** — Retrieves relevant historical incidents and troubleshooting documents.
-- 🔗 **Evidence Correlation** — Connects related events across multiple data sources.
-- 🧠 **Root Cause Analysis** — Generates RCA with confidence and supporting rationale.
-- 🔍 **Critic Validation** — Independently reviews the generated RCA.
-- 👤 **Human-in-the-Loop** — Allows engineers to approve or request RCA rework.
-- 🔄 **Rework Workflow** — Sends rejected RCAs back for another investigation cycle.
-- 📄 **Final Incident Report** — Generates a structured incident report after approval.
-- ⚡ **Offline / Demo Mode** — Supports deterministic execution without requiring LLM calls.
-- 🧠 **Live AI Mode** — Uses Groq for AI-powered reasoning.
-- 🖥️ **Streamlit UI** — Interactive interface for the complete investigation workflow.
+This project automates the investigation process and presents the engineer with an evidence-based RCA.
 
 ---
 
-## 🏗️ Architecture
+# ✨ Key Features
+
+- 🤖 **Multi-Agent Investigation**
+- 📊 **Log & Metrics Analysis**
+- 🗄️ **Database Investigation**
+- 🚀 **Deployment Analysis**
+- 📚 **RAG Knowledge Retrieval**
+- 🔗 **Cross-source Evidence Correlation**
+- 🎯 **Root Cause Analysis with Confidence**
+- 🔍 **Critic Validation**
+- 👤 **Human-in-the-Loop Approval**
+- 🔄 **RCA Rework Workflow**
+- 📄 **Final Incident Report**
+- ⚡ **Offline / Demo Mode**
+- 🧠 **Live AI Mode with Groq**
+- 🖥️ **Interactive Streamlit UI**
+
+---
+
+# 🖥️ Application
+
+<p align="center">
+  <img src="assets/application.png" alt="Main Application Interface" width="1000">
+</p>
+
+The interface allows users to enter incident details and start an investigation.
+
+The workflow displayed in the application is:
+
+```text
+1. Supervisor
+2. RAG
+3. Logs
+4. Metrics
+5. Database
+6. Deployment
+7. Correlation
+8. Root Cause
+9. Critic
+10. Human Review
+11. Final Report
+```
+
+---
+
+# 🏗️ Architecture
 
 ```text
                     ┌─────────────────┐
@@ -107,7 +154,7 @@ This project provides an automated investigation workflow that combines these si
                              │
                              ▼
                     ┌─────────────────┐
-                    │ Supervisor Agent│
+                    │    Supervisor   │
                     └────────┬────────┘
                              │
               ┌──────────────┼──────────────┐
@@ -116,19 +163,19 @@ This project provides an automated investigation workflow that combines these si
               │              │              │
               └──────────────┼──────────────┘
                              ▼
-                       Deployment
+                       Deployments
                              │
                              ▼
-                      RAG Retrieval
+                       RAG Retrieval
                              │
                              ▼
-                     Correlation Agent
+                    Correlation Agent
                              │
                              ▼
-                     Root Cause Agent
+                    Root Cause Agent
                              │
                              ▼
-                       Critic Agent
+                      Critic Agent
                              │
                              ▼
                       Human Review
@@ -145,9 +192,7 @@ This project provides an automated investigation workflow that combines these si
 
 ---
 
-## 🔄 Workflow
-
-The investigation follows a stateful LangGraph workflow:
+# 🔄 Workflow
 
 ```text
 START
@@ -176,15 +221,15 @@ Human Review
   └── Rework → Root Cause → Critic → Human Review
 ```
 
-This allows the system to perform investigation, validation, and human-guided iteration within a single workflow.
+The workflow is implemented as a **stateful LangGraph graph**, allowing investigation data to be shared across agents.
 
 ---
 
-## 🤖 Multi-Agent System
+# 🤖 Multi-Agent System
 
 | Agent | Responsibility |
 |---|---|
-| **Supervisor Agent** | Initializes and coordinates the investigation |
+| **Supervisor Agent** | Coordinates the investigation |
 | **Log Agent** | Analyzes application logs and errors |
 | **Metrics Agent** | Investigates API performance and error metrics |
 | **Database Agent** | Analyzes database events and connection failures |
@@ -192,69 +237,78 @@ This allows the system to perform investigation, validation, and human-guided it
 | **Correlation Agent** | Connects evidence across sources |
 | **Root Cause Agent** | Generates the most likely RCA |
 | **Critic Agent** | Validates the RCA |
-| **Final Report Agent** | Generates the final incident report |
+| **Final Report Agent** | Generates the final report |
 
 ---
 
-## 📚 RAG Knowledge Base
+# 📚 RAG Knowledge Base
 
-The project includes a local knowledge base containing:
+The project contains a local knowledge base:
 
 ```text
 knowledge/
 ├── incidents/
 │   └── INC-0001.md
-│
 ├── runbooks/
 │   └── database_connection_pool.md
-│
 └── troubleshooting/
     └── http_500_database_errors.md
 ```
 
-The RAG pipeline retrieves relevant documentation and provides additional context to the investigation.
+The RAG pipeline retrieves relevant historical incidents, runbooks, and troubleshooting information to provide additional context during investigation.
 
-The current implementation uses an **in-memory vector store with local embeddings**, keeping the system lightweight and easy to run.
-
----
-
-## 👤 Human-in-the-Loop
-
-Before the final report is generated, the workflow pauses for human review.
-
-The reviewer can:
-
-```text
-Approve RCA
-     │
-     ▼
-Final Incident Report
-```
-
-or:
-
-```text
-Request Rework
-     │
-     ▼
-Root Cause Agent
-     │
-     ▼
-Critic Agent
-     │
-     ▼
-Human Review
-```
-
-This prevents the system from treating an AI-generated RCA as automatically correct.
+The implementation uses an **in-memory vector store with local embeddings**.
 
 ---
 
-## 📊 Example Investigation
+# 🔎 Evidence Correlation
 
-A sample incident demonstrates a relationship between a recent deployment, database connection pool problems, and HTTP 500 errors.
+The Correlation Agent combines information from:
 
-The resulting RCA can identify:
+```text
+Logs
+   +
+Metrics
+   +
+Database Events
+   +
+Deployments
+   +
+Historical Knowledge
+   ↓
+Evidence Correlation
+```
+
+Example:
+
+```text
+Deployment v2.4.1
+       ↓
+Connection-Pool Configuration Change
+       ↓
+Connection Pool Exhaustion
+       ↓
+Database Failures
+       ↓
+HTTP 500 Errors
+       ↓
+Increased Latency
+```
+
+This relationship is then used to support the RCA.
+
+---
+
+# 🎯 Root Cause Analysis
+
+The Root Cause Agent produces:
+
+- Proposed root cause
+- Confidence score
+- Root-cause rationale
+- Evidence to verify
+
+Example:
 
 ```text
 Database connection pool misconfiguration introduced
@@ -262,11 +316,254 @@ in deployment v2.4.1, leading to connection pool exhaustion
 and subsequent HTTP 500 errors.
 ```
 
-The demonstrated workflow produced a **95% RCA confidence** and a **PASS** verdict from the Critic Agent before reaching Human Review.
+---
+
+# 🔍 Critic Validation
+
+The Critic Agent reviews the proposed RCA before it reaches human approval.
+
+It evaluates:
+
+- Evidence support
+- Agreement between evidence sources
+- Logical consistency
+- Contradictory evidence
+- Confidence level
+
+Possible outcomes include:
+
+```text
+PASS
+```
+
+or RCA rework.
 
 ---
 
-## 🛠️ Tech Stack
+# 👤 Human-in-the-Loop
+
+<p align="center">
+  <img src="assets/human-review.png" alt="Human-in-the-Loop Review" width="1000">
+</p>
+
+The investigation pauses before final report generation.
+
+The engineer can:
+
+### ✅ Approve RCA
+
+```text
+Human Review
+     ↓
+Approve
+     ↓
+Final Report
+```
+
+### 🔄 Request Rework
+
+```text
+Human Review
+     ↓
+Request Rework
+     ↓
+Root Cause
+     ↓
+Critic
+     ↓
+Human Review
+```
+
+This ensures that AI-generated conclusions are reviewed before the final result is produced.
+
+---
+
+# 📊 Investigation Results
+
+<p align="center">
+  <img src="assets/investigation.png" alt="Investigation Results" width="1000">
+</p>
+
+The results page provides:
+
+- Incident ID
+- Service
+- RCA confidence
+- Root cause
+- Critic verdict
+- Human decision
+- Investigation iterations
+- Evidence counts
+- Correlations
+- Hypotheses
+
+---
+
+# 🧩 Agent Investigation Timeline
+
+<p align="center">
+  <img src="assets/findings.png" alt="Agent Investigation Timeline" width="1000">
+</p>
+
+The application records investigation events and displays the progress of the agents involved in the workflow.
+
+```text
+Supervisor
+    ↓
+Logs
+    ↓
+Metrics
+    ↓
+Database
+    ↓
+Deployment
+    ↓
+Correlation
+    ↓
+Root Cause
+    ↓
+Critic
+    ↓
+Human Review
+    ↓
+Final Report
+```
+
+---
+
+# 📌 Example Investigation
+
+A sample incident demonstrates the relationship between a deployment, database connection-pool problems, and HTTP 500 errors.
+
+```text
+Deployment v2.4.1
+       ↓
+Database Connection-Pool Configuration Change
+       ↓
+Connection Pool Exhaustion
+       ↓
+Database Errors
+       ↓
+HTTP 500 Errors
+```
+
+The demonstrated Live AI workflow produced:
+
+```text
+RCA Confidence: 95%
+Critic Verdict: PASS
+```
+
+before reaching Human Review.
+
+---
+
+# 📈 Investigation Data
+
+The project includes structured operational data:
+
+```text
+data/
+├── logs/
+│   └── application_logs.csv
+├── metrics/
+│   └── api_metrics.csv
+├── databases/
+│   └── database_events.csv
+└── deployments/
+    └── deployment_history.csv
+```
+
+These datasets simulate the types of information used during software incident investigation.
+
+---
+
+# ⚡ Execution Modes
+
+## 🟢 Offline / Demo Mode
+
+Runs the complete investigation workflow without consuming Groq API calls.
+
+Useful for:
+
+- Testing
+- Demonstrations
+- Reproducible execution
+- API quota limitations
+
+```text
+Streamlit
+    ↓
+LangGraph
+    ↓
+Deterministic Investigation
+    ↓
+RCA
+    ↓
+Critic
+    ↓
+Human Review
+    ↓
+Final Report
+```
+
+## 🟣 Live AI Mode
+
+Uses the configured Groq model for AI-powered reasoning.
+
+```text
+Streamlit
+    ↓
+LangGraph
+    ↓
+Specialized Agents
+    ↓
+Groq LLM
+    ↓
+RCA
+    ↓
+Critic
+    ↓
+Human Review
+    ↓
+Final Report
+```
+
+---
+
+# 📄 Final Incident Report
+
+After human approval, the Final Report Agent generates a structured report containing:
+
+```text
+INCIDENT FINAL REPORT
+
+Incident ID
+Service
+Severity
+Description
+Generated At
+
+ROOT CAUSE
+
+Root Cause Explanation
+
+Confidence
+
+ROOT CAUSE RATIONALE
+
+Evidence-Based Reasoning
+
+CORRELATIONS
+
+Important Evidence Relationships
+```
+
+The report can be viewed and downloaded from the Streamlit application.
+
+---
+
+# 🛠️ Tech Stack
 
 | Technology | Purpose |
 |---|---|
@@ -274,16 +571,30 @@ The demonstrated workflow produced a **95% RCA confidence** and a **PASS** verdi
 | **LangGraph** | Stateful workflow orchestration |
 | **LangChain** | LLM application framework |
 | **Groq** | Live AI inference |
-| **Streamlit** | Web interface |
-| **Pandas** | Dataset processing |
+| **Streamlit** | Interactive web interface |
+| **Pandas** | Data processing |
 | **Scikit-learn** | Local embeddings |
-| **Python-dotenv** | Environment configuration |
+| **Python-dotenv** | Configuration |
 | **Git & GitHub** | Version control |
 | **Streamlit Community Cloud** | Deployment |
 
+### AI Concepts
+
+- Generative AI
+- Agentic AI
+- Multi-Agent Systems
+- RAG
+- LLM Integration
+- Prompt Engineering
+- Evidence Correlation
+- Root Cause Analysis
+- Critic Validation
+- Human-in-the-Loop
+- Stateful AI Workflows
+
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 Incident-Commander/
@@ -323,21 +634,29 @@ Incident-Commander/
 │   ├── database_tools.py
 │   └── deployment_tools.py
 │
+├── tests/
+│
 ├── ui/
 │   └── streamlit_app.py
 │
-├── tests/
+├── assets/
+│   ├── application.png
+│   ├── demo.gif
+│   ├── findings.png
+│   ├── human-review.png
+│   └── investigation.png
 │
 ├── test_graph.py
 ├── requirements.txt
 ├── pyproject.toml
 ├── .env.example
+├── .gitignore
 └── README.md
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
 ### 1. Clone the repository
 
@@ -350,6 +669,12 @@ cd Incident-Commander
 
 ```bash
 python -m venv .venv
+```
+
+Or:
+
+```bash
+uv venv
 ```
 
 ### 3. Activate environment
@@ -372,23 +697,45 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 5. Configure environment
+Or:
+
+```bash
+uv pip install -r requirements.txt
+```
+
+---
+
+# 🔐 Environment Configuration
 
 Create a `.env` file:
 
 ```env
+APP_ENV=development
+LOG_LEVEL=INFO
+
 LLM_PROVIDER=groq
 LLM_MODEL=openai/gpt-oss-120b
+
 GROQ_API_KEY=your_groq_api_key_here
+
+MAX_EVIDENCE_ITEMS=20
+CONFIDENCE_THRESHOLD=0.70
+
+DATA_DIR=data
+INCIDENTS_DIR=data/incidents
+LOGS_DIR=data/logs
+METRICS_DIR=data/metrics
+DEPLOYMENTS_DIR=data/deployments
+DATABASES_DIR=data/databases
 ```
 
-For Offline / Demo mode, a Groq API key is not required.
+For **Offline / Demo Mode**, a Groq API key is not required.
+
+> Never commit `.env` or API keys to GitHub.
 
 ---
 
-## ▶️ Run the Application
-
-Start the Streamlit application:
+# ▶️ Run the Application
 
 ```bash
 streamlit run ui/streamlit_app.py
@@ -398,12 +745,18 @@ Then open the local Streamlit URL shown in the terminal.
 
 ---
 
-## 🧪 Testing
+# 🧪 Testing
 
-Run the graph integration test:
+Run the offline integration workflow:
 
 ```bash
 python test_graph.py
+```
+
+Or:
+
+```bash
+uv run python test_graph.py
 ```
 
 Run the RAG module independently:
@@ -412,61 +765,89 @@ Run the RAG module independently:
 python -m app.rag
 ```
 
-Offline mode can be used for reproducible testing without repeatedly calling the external LLM.
+Or:
+
+```bash
+uv run python -m app.rag
+```
 
 ---
 
-## 🚀 Future Improvements
+# 🌐 Deployment
 
-- Real-time integration with monitoring and logging platforms
-- Prometheus/Grafana integration
-- Kubernetes investigation agents
-- AWS/Azure/GCP integrations
-- Slack and Microsoft Teams notifications
-- Jira / ServiceNow incident creation
-- Persistent incident history
-- Production-grade vector database
-- Automated remediation with human approval
-- Authentication and role-based access
-- Incident analytics dashboard
+The application is deployed using **Streamlit Community Cloud**.
 
----
+**Live Application:**  
+https://incident-commander-nxajqnrs43zdexjv43y72u.streamlit.app/
 
-## 📌 Project Highlights
-
-This project demonstrates practical implementation of:
-
-- Multi-Agent AI
-- Generative AI
-- LangGraph
-- LangChain
-- Retrieval-Augmented Generation
-- Root Cause Analysis
-- Evidence Correlation
-- Stateful AI Workflows
-- Human-in-the-Loop Systems
-- Streamlit Application Development
-- Cloud Deployment
-
----
-
-## 👨‍💻 Author
-
-**Narra Mohith Charan**
-
-GitHub:  
+**GitHub Repository:**  
 https://github.com/Mohith2801/Incident-Commander
 
 ---
 
-## ⭐ Support
+# 🚀 Future Improvements
 
-If you found this project useful, consider giving the repository a ⭐ on GitHub.
+- Real-time log streaming
+- Prometheus / Grafana integration
+- Kubernetes investigation
+- AWS / Azure / GCP monitoring integrations
+- Slack / Microsoft Teams notifications
+- Jira / ServiceNow integration
+- Persistent incident history
+- Production-grade vector database
+- Automated remediation suggestions
+- Remediation with human approval
+- Authentication and role-based access
+- Incident analytics dashboard
+- Anomaly detection
+- Long-term incident memory
 
 ---
 
-## ⚠️ Disclaimer
+# 📌 Project Highlights
+
+This project demonstrates practical implementation of:
+
+- 🤖 Multi-Agent AI
+- 🧠 Agentic AI
+- 📚 Retrieval-Augmented Generation
+- 🔗 LangGraph Workflows
+- 🎯 Root Cause Analysis
+- 🔍 Critic Validation
+- 👤 Human-in-the-Loop
+- 📊 Evidence Correlation
+- ⚡ Offline / Live AI Execution
+- 🖥️ Streamlit Development
+- 🌐 Cloud Deployment
+
+---
+
+# 👨‍💻 Author
+
+**Narra Mohith Charan**
+
+B.Tech Information Technology  
+IIIT Bhubaneswar
+
+**GitHub:**  
+https://github.com/Mohith2801
+
+**Project:**  
+https://github.com/Mohith2801/Incident-Commander
+
+**Live Demo:**  
+https://incident-commander-nxajqnrs43zdexjv43y72u.streamlit.app/
+
+---
+
+# ⭐ Support
+
+If you find this project useful or interesting, consider giving the repository a ⭐ on GitHub.
+
+---
+
+# ⚠️ Disclaimer
 
 This project is intended for educational, portfolio, and demonstration purposes.
 
-AI-generated incident analysis should be reviewed and verified by qualified engineers before being used for real production incident decisions.
+AI-generated incident analysis should be independently verified by qualified engineers before being used for real production decisions.
