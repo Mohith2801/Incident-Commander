@@ -773,17 +773,6 @@ uv run python -m app.rag
 
 ---
 
-# 🌐 Deployment
-
-The application is deployed using **Streamlit Community Cloud**.
-
-**Live Application:**  
-https://incident-commander-nxajqnrs43zdexjv43y72u.streamlit.app/
-
-**GitHub Repository:**  
-https://github.com/Mohith2801/Incident-Commander
-
----
 
 # 🚀 Future Improvements
 
@@ -828,15 +817,6 @@ This project demonstrates practical implementation of:
 
 B.Tech Information Technology  
 IIIT Bhubaneswar
-
-**GitHub:**  
-https://github.com/Mohith2801
-
-**Project:**  
-https://github.com/Mohith2801/Incident-Commander
-
-**Live Demo:**  
-https://incident-commander-nxajqnrs43zdexjv43y72u.streamlit.app/
 
 ---
 
