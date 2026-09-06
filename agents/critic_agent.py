@@ -11,13 +11,15 @@ from app.llm import get_llm
 CRITIC_SYSTEM_PROMPT = """
 You are an incident RCA critic.
 
-Evaluate whether the proposed root cause is sufficiently supported.
+Evaluate whether the proposed root cause is sufficiently supported
+by the actual incident evidence provided.
 
 PASS when:
-- Evidence directly matches the proposed cause.
-- Multiple findings support the same explanation.
+- Evidence directly supports the proposed cause.
+- Multiple findings support the same explanation when available.
 - Confidence is reasonable.
 - No strong contradictory evidence exists.
+- The proposed RCA explains the incident symptoms.
 
 REWORK only when:
 - The RCA is poorly supported.
@@ -27,11 +29,16 @@ REWORK only when:
 
 Missing evidence alone does NOT require REWORK.
 
+Do not assume a specific root cause.
+Do not invent evidence.
+Evaluate only the incident and evidence provided.
+
 Return ONLY valid JSON:
 
 {
   "verdict": "PASS",
   "confidence_valid": true,
+  "confidence": 0.0,
   "feedback": "brief assessment",
   "missing_evidence": [],
   "contradictory_evidence": []
@@ -55,6 +62,28 @@ def _extract_content(response) -> str:
         return "".join(parts).strip()
 
     return str(content).strip()
+
+
+def _parse_confidence(value) -> float:
+    try:
+        if isinstance(value, str):
+            value = value.strip()
+
+            if "%" in value:
+                number = float(value.replace("%", "").strip())
+                number /= 100.0
+            else:
+                number = float(value)
+        else:
+            number = float(value)
+
+    except (TypeError, ValueError):
+        return 0.0
+
+    if number > 1:
+        number /= 100.0
+
+    return max(0.0, min(1.0, number))
 
 
 def _clean_json(text: str) -> dict:
@@ -90,8 +119,30 @@ def critic_agent_node(
     )
 
     evidence = {
-        "root_cause": state.get("root_cause", ""),
-        "confidence": state.get("confidence", 0.0),
+        "incident_id": state.get(
+            "incident_id",
+            "",
+        ),
+        "description": state.get(
+            "description",
+            "",
+        ),
+        "service": state.get(
+            "service",
+            "",
+        ),
+        "severity": state.get(
+            "severity",
+            "",
+        ),
+        "root_cause": state.get(
+            "root_cause",
+            "",
+        ),
+        "confidence": state.get(
+            "confidence",
+            0.0,
+        ),
         "rationale": state.get(
             "root_cause_rationale",
             "",
@@ -100,23 +151,48 @@ def critic_agent_node(
             "root_cause",
             "",
         ),
+        "alternative_confidence": alternative.get(
+            "confidence",
+            0.0,
+        ),
+        "log_findings": state.get(
+            "log_findings",
+            [],
+        ),
+        "metrics_findings": state.get(
+            "metrics_findings",
+            [],
+        ),
+        "database_findings": state.get(
+            "database_findings",
+            [],
+        ),
+        "deployment_findings": state.get(
+            "deployment_findings",
+            [],
+        ),
         "correlations": state.get(
             "correlations",
+            [],
+        ),
+        "rag_context": state.get(
+            "rag_context",
             [],
         ),
     }
 
     prompt = (
-        "Review this incident RCA.\n\n"
+        "Review the following incident RCA.\n\n"
         + json.dumps(
             evidence,
             separators=(",", ":"),
+            default=str,
         )
         + "\n\n"
-        "The incident has HTTP 500 errors caused by "
-        "database connection failures. Determine whether "
-        "the proposed RCA is sufficiently supported. "
-        "Return ONLY JSON."
+        "Evaluate the proposed root cause using ONLY "
+        "the incident evidence provided above. "
+        "Do not assume any specific cause. "
+        "Return ONLY valid JSON."
     )
 
     try:
@@ -141,13 +217,38 @@ def critic_agent_node(
                 "verdict",
                 "REWORK",
             )
-        ).upper()
+        ).upper().strip()
 
         if verdict not in {
             "PASS",
             "REWORK",
         }:
             verdict = "REWORK"
+
+        confidence_valid = result.get(
+            "confidence_valid",
+            False,
+        )
+
+        if isinstance(
+            confidence_valid,
+            str,
+        ):
+            confidence_valid = (
+                confidence_valid.lower().strip()
+                == "true"
+            )
+        else:
+            confidence_valid = bool(
+                confidence_valid
+            )
+
+        critic_confidence = _parse_confidence(
+            result.get(
+                "confidence",
+                0.0,
+            )
+        )
 
         feedback = str(
             result.get(
@@ -207,6 +308,17 @@ def critic_agent_node(
             )
 
         return {
+            "critic_verdict": verdict,
+            "critic_confidence": critic_confidence,
+            "critic_confidence_valid": (
+                confidence_valid
+            ),
+            "critic_missing_evidence": (
+                missing_evidence
+            ),
+            "critic_contradictory_evidence": (
+                contradictory_evidence
+            ),
             "critic_feedback": critic_feedback,
             "investigation_status": (
                 "critic_review_complete"
@@ -221,7 +333,10 @@ def critic_agent_node(
     except Exception as exc:
         error_text = str(exc)
 
-        if "429" in error_text or "rate_limit" in error_text.lower():
+        if (
+            "429" in error_text
+            or "rate_limit" in error_text.lower()
+        ):
             feedback = (
                 "Critic review could not be completed "
                 "because the Groq API rate limit was reached. "
@@ -234,6 +349,11 @@ def critic_agent_node(
             )
 
         return {
+            "critic_verdict": "ERROR",
+            "critic_confidence": 0.0,
+            "critic_confidence_valid": False,
+            "critic_missing_evidence": [],
+            "critic_contradictory_evidence": [],
             "critic_feedback": feedback,
             "investigation_status": (
                 "critic_review_failed"
@@ -286,9 +406,23 @@ if __name__ == "__main__":
 
     print("CRITIC RESULT:")
     print(result.get("critic_feedback"))
+
+    print()
+    print("VERDICT:")
+    print(result.get("critic_verdict"))
+
+    print()
+    print("CRITIC CONFIDENCE:")
+    print(result.get("critic_confidence"))
+
+    print()
+    print("CONFIDENCE VALID:")
+    print(result.get("critic_confidence_valid"))
+
     print()
     print("STATUS:")
     print(result.get("investigation_status"))
+
     print()
     print("NEXT ACTION:")
     print(result.get("next_action"))

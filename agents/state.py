@@ -61,11 +61,15 @@ class AegisIncidentState(TypedDict, total=False):
     # ============================================================
     critic_feedback: str
     critic_verdict: str
+    critic_confidence: float
+    critic_confidence_valid: bool
+    critic_missing_evidence: list[str]
+    critic_contradictory_evidence: list[str]
 
-    # Possible values:
+    # Possible critic verdicts:
     # - PASS
     # - REWORK
-    critic_confidence: float
+    # - ERROR
 
     # ============================================================
     # HUMAN-IN-THE-LOOP
